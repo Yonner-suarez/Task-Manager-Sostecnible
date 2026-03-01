@@ -1,5 +1,5 @@
 import React from "react";
-import { useTaskStore } from "../utils/store";
+import { useTaskStore } from "../store/store";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function SearchBar() {

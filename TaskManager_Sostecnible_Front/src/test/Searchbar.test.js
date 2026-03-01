@@ -3,7 +3,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import SearchBar from "../components/Searchbar";
 
-jest.mock("../utils/store", () => ({
+jest.mock("../store/store", () => ({
   useTaskStore: () => ({
     searchQuery: "",
     setSearchQuery: jest.fn(),

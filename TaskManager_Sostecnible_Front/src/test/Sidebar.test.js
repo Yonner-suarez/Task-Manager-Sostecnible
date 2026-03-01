@@ -1,9 +1,9 @@
 // src/test/Sidebar.test.js
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import Sidebar from "../components/sidebar";
+import Sidebar from "../components/Sidebar";
 
-jest.mock("../utils/store", () => ({
+jest.mock("../store/store", () => ({
   useTaskStore: () => ({
     setFilterPriority: jest.fn(),
     setFilterStatus: jest.fn(),

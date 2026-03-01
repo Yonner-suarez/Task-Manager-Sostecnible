@@ -1,16 +1,16 @@
-// TaskList.test.js
+jest.mock("../api/taskApi", () => require("./taskApi.mock"));
+
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import TaskList from "../components/TaskList";
-import { useTaskStore } from "../utils/store";
+import TaskList from "../pages/TaskList"; // ahora sí usará el mock
+import { useTaskStore } from "../store/store";
 import { useQuery } from "@tanstack/react-query";
 
-// Mock del store
-jest.mock("../utils/store");
-
-// Mock de react-query
+// Mock del store y react-query
+jest.mock("../store/store");
 jest.mock("@tanstack/react-query");
 
+// --- TESTS ---
 test("muestra mensaje de cargando", () => {
   useTaskStore.mockReturnValue({
     filterPriority: "",
@@ -25,7 +25,6 @@ test("muestra mensaje de cargando", () => {
   });
 
   render(<TaskList />);
-
   expect(screen.getByText("Cargando tareas...")).toBeInTheDocument();
 });
 
@@ -43,7 +42,6 @@ test("muestra mensaje cuando no hay tareas", () => {
   });
 
   render(<TaskList />);
-
   expect(screen.getByText("No hay tareas para mostrar.")).toBeInTheDocument();
 });
 
@@ -74,19 +72,14 @@ test("renderiza lista de tareas", () => {
     },
   ];
 
-  useQuery.mockReturnValue({
-    data: tasksMock,
-    isLoading: false,
-  });
+  useQuery.mockReturnValue({ data: tasksMock, isLoading: false });
 
   render(<TaskList />);
-
   expect(screen.getByText("Tarea 1")).toBeInTheDocument();
   expect(screen.getByText("Descripción 1")).toBeInTheDocument();
   expect(screen.getByText("Tarea 2")).toBeInTheDocument();
   expect(screen.getByText("Sin descripción")).toBeInTheDocument();
 
-  // Test click en tarea
   fireEvent.click(screen.getByText("Tarea 1"));
   expect(mockSetSelectedTask).toHaveBeenCalledWith(tasksMock[0]);
 });

@@ -1,9 +1,9 @@
 import React from "react";
-import Sidebar from "./components/sidebar";
-import TaskList from "./components/TaskList";
+import Sidebar from "./components/Sidebar";
+import TaskList from "./pages/TaskList";
 import SearchBar from "./components/Searchbar";
-import TaskDetail from "./components/TaskDetail";
-import { useTaskStore } from "./utils/store";
+import TaskDetail from "./pages/TaskDetail";
+import { useTaskStore } from "./store/store";
 
 export default function App() {
   const { setSelectedTask } = useTaskStore();

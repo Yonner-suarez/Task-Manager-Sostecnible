@@ -43,9 +43,10 @@ public class TaskController {
       public List<Task> getAll(
               @RequestParam(required = false) String priority,
               @RequestParam(required = false) String status,
-              @RequestParam(required = false) String search
+              @RequestParam(required = false) String search,
+              @RequestParam(required = false) String sortBy
       ) {
-        return getTasks.getByFilter(priority, status, search);
+        return getTasks.getByFilter(priority, status, search, sortBy);
       }
 
     @PutMapping("/{id}")

@@ -1,16 +1,16 @@
 // src/test/TaskDetail.test.js
 import React from "react";
-import { render, screen, fireEvent } from "@testing-library/react";
-import TaskDetail from "../components/TaskDetail";
+import { render, screen } from "@testing-library/react";
+import TaskDetail from "../pages/TaskDetail";
 
-jest.mock("../utils/store", () => ({
+jest.mock("../store/store", () => ({
   useTaskStore: () => ({
     selectedTask: null,
     setSelectedTask: jest.fn(),
   }),
 }));
 
-jest.mock("../api/task", () => ({
+jest.mock("../api/taskApi", () => ({
   createOrUpdateTask: jest.fn(),
 }));
 

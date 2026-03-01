@@ -22,13 +22,34 @@ public class GetTasksUseCase {
         .filter(task -> task.getIsActive() != null && task.getIsActive() == 1);
   }
 
-  public List<Task> getByFilter(String priority, String status, String search) {
-    return repository.findAll().stream()
+  public List<Task> getByFilter(String priority, String status, String search, String sortBy) {
+    List<Task> tasks = repository.findAll().stream()
         .filter(task -> task.getIsActive() != null && task.getIsActive() == 1)
         .filter(task -> priority == null || priority.isBlank() || task.getPriority().name().equalsIgnoreCase(priority))
         .filter(task -> status == null || status.isBlank() || task.getStatus().equalsIgnoreCase(status))
         .filter(
             task -> search == null || search.isBlank() || task.getTitle().toLowerCase().contains(search.toLowerCase()))
         .collect(Collectors.toList());
+
+    sortTask(tasks, sortBy);
+
+    return tasks;
   }
+
+ private void sortTask(List<Task> tasks, String sortBy) {
+    if (sortBy == null || sortBy.isBlank())
+        return;
+
+    switch (sortBy) {
+        case "soonest": 
+            tasks.sort((t1, t2) -> t2.getCreatedAt().compareTo(t1.getCreatedAt()));
+            break;
+        case "latest": 
+            tasks.sort((t1, t2) -> t1.getCreatedAt().compareTo(t2.getCreatedAt()));
+            break;
+        default:
+            // No hacer nada
+            break;
+    }
+}
 }

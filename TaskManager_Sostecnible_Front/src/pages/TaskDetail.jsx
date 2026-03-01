@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useTaskStore } from "../utils/store";
-import { createOrUpdateTask } from "../api/task";
+import { useTaskStore } from "../store/store";
+import { createOrUpdateTask } from "../api/taskApi";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function TaskDetail() {

@@ -5,9 +5,11 @@ export const useTaskStore = create((set) => ({
   filterStatus: null, // 'Pendiente', 'En Progreso', 'Completada'
   searchQuery: "",
   selectedTask: null,
+  sortBy: null, // 'proxima', 'lejana'
 
   setFilterPriority: (priority) => set({ filterPriority: priority }),
   setFilterStatus: (status) => set({ filterStatus: status }),
   setSearchQuery: (query) => set({ searchQuery: query }),
   setSelectedTask: (task) => set({ selectedTask: task }),
+  setSortBy: (sort) => set({ sortBy: sort }),
 }));

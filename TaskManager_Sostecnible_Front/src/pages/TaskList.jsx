@@ -1,11 +1,11 @@
 import React from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { fetchTasks, deleteTask } from "../api/task";
-import { useTaskStore } from "../utils/store";
+import { fetchTasks, deleteTask } from "../api/taskApi";
+import { useTaskStore } from "../store/store";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function TaskList() {
-  const { filterPriority, filterStatus, searchQuery, setSelectedTask } =
+  const { filterPriority, filterStatus, searchQuery, setSelectedTask, sortBy } =
     useTaskStore();
 
   const queryClient = useQueryClient();
@@ -13,7 +13,12 @@ export default function TaskList() {
   const { data: tasks, isLoading } = useQuery({
     queryKey: [
       "tasks",
-      { priority: filterPriority, status: filterStatus, search: searchQuery },
+      {
+        priority: filterPriority,
+        status: filterStatus,
+        search: searchQuery,
+        sortBy: sortBy,
+      },
     ],
     queryFn: fetchTasks,
   });
