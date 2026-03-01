@@ -1,4 +1,4 @@
-package com.sostecnible.TaskManager.aplication;
+package com.sostecnible.TaskManager.aplication.TaskUseCasesTests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -22,7 +22,7 @@ class CreateTaskUseCaseTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this); // Inicializa @Mock y @InjectMocks
+        MockitoAnnotations.openMocks(this); 
     }
 
     @Test

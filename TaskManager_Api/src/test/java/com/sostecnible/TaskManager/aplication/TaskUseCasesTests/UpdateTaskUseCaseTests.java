@@ -1,4 +1,4 @@
-package com.sostecnible.TaskManager.aplication;
+package com.sostecnible.TaskManager.aplication.TaskUseCasesTests;
 
 import com.sostecnible.TaskManager.aplication.usecase.UseCaseTask.UpdateTaskUseCase;
 import com.sostecnible.TaskManager.domain.model.Task;

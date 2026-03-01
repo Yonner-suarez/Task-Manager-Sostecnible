@@ -11,12 +11,11 @@ export default function AuthModal({ onLoginSuccess }) {
   const [formData, setFormData] = useState({
     userName: "",
     email: "",
-    identifier: "", // Solo para login
+    identifier: "",
     password: "",
     confirmPassword: "",
   });
 
-  // Mutación de Login
   const loginMutation = useMutation({
     mutationFn: () => loginUser(formData.identifier, formData.password),
     onSuccess: (token) => {
@@ -26,7 +25,6 @@ export default function AuthModal({ onLoginSuccess }) {
     },
   });
 
-  // Mutación de Registro
   const registerMutation = useMutation({
     mutationFn: () =>
       registerUser({
@@ -42,7 +40,6 @@ export default function AuthModal({ onLoginSuccess }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (isRegister) {
       if (formData.password !== formData.confirmPassword) {
         return showToast("Las contraseñas no coinciden", "error");
@@ -76,10 +73,11 @@ export default function AuthModal({ onLoginSuccess }) {
             {isRegister && (
               <>
                 <div className="mb-3">
-                  <label className="form-label fw-semibold">
+                  <label htmlFor="userName" className="form-label fw-semibold">
                     Nombre de Usuario
                   </label>
                   <input
+                    id="userName"
                     type="text"
                     className="form-control"
                     placeholder="ej: juanperez1"
@@ -90,8 +88,11 @@ export default function AuthModal({ onLoginSuccess }) {
                   />
                 </div>
                 <div className="mb-3">
-                  <label className="form-label fw-semibold">Email</label>
+                  <label htmlFor="email" className="form-label fw-semibold">
+                    Email
+                  </label>
                   <input
+                    id="email"
                     type="email"
                     className="form-control"
                     placeholder="juan@ejemplo.com"
@@ -106,10 +107,11 @@ export default function AuthModal({ onLoginSuccess }) {
 
             {!isRegister && (
               <div className="mb-3">
-                <label className="form-label fw-semibold">
+                <label htmlFor="identifier" className="form-label fw-semibold">
                   Usuario o Email
                 </label>
                 <input
+                  id="identifier"
                   type="text"
                   className="form-control"
                   value={formData.identifier}
@@ -122,9 +124,12 @@ export default function AuthModal({ onLoginSuccess }) {
             )}
 
             <div className="mb-3">
-              <label className="form-label fw-semibold">Contraseña</label>
+              <label htmlFor="password" className="form-label fw-semibold">
+                Contraseña
+              </label>
               <div className="input-group">
                 <input
+                  id="password"
                   type={showPassword ? "text" : "password"}
                   className="form-control"
                   value={formData.password}
@@ -136,6 +141,7 @@ export default function AuthModal({ onLoginSuccess }) {
                 <button
                   className="btn btn-outline-secondary"
                   type="button"
+                  aria-label="Mostrar u ocultar contraseña"
                   onClick={() => setShowPassword(!showPassword)}
                 >
                   <i
@@ -147,10 +153,14 @@ export default function AuthModal({ onLoginSuccess }) {
 
             {isRegister && (
               <div className="mb-3">
-                <label className="form-label fw-semibold">
+                <label
+                  htmlFor="confirmPassword"
+                  className="form-label fw-semibold"
+                >
                   Confirmar Contraseña
                 </label>
                 <input
+                  id="confirmPassword"
                   type={showPassword ? "text" : "password"}
                   className="form-control"
                   onChange={(e) =>
