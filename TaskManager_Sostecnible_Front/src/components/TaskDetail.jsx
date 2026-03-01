@@ -8,16 +8,28 @@ export default function TaskDetail() {
   const [form, setForm] = useState({
     title: "",
     description: "",
-    priority: "Media",
-    status: "Pendiente",
+    priority: "MEDIA",
+    status: "PENDIENTE",
+    fechaVencimiento: "", // nueva propiedad
   });
 
   useEffect(() => {
-    if (selectedTask) setForm(selectedTask);
+    if (selectedTask) {
+      setForm({
+        ...selectedTask,
+        priority: selectedTask.priority.toUpperCase(),
+        fechaVencimiento: selectedTask.fechaVencimiento || "",
+      });
+    }
   }, [selectedTask]);
 
-  const handleChange = (e) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setForm({
+      ...form,
+      [name]: name === "priority" ? value.toUpperCase() : value,
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,6 +43,15 @@ export default function TaskDetail() {
         Selecciona una tarea para ver detalles o crear nueva.
       </div>
     );
+
+  // Fecha mínima: mañana
+  const today = new Date();
+  const tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
+  const minDate = tomorrow.toISOString().split("T")[0]; // formato yyyy-mm-dd
+
+  // Solo deshabilitar si la fecha ya viene de la DB
+  const isDisabled = selectedTask?.fechaVencimiento ? true : false;
 
   return (
     <div className="card shadow-sm border-0 rounded-3 p-3">
@@ -71,9 +92,9 @@ export default function TaskDetail() {
             value={form.priority}
             onChange={handleChange}
           >
-            <option>Alta</option>
-            <option>Media</option>
-            <option>Baja</option>
+            <option value="ALTA">Alta</option>
+            <option value="MEDIA">Media</option>
+            <option value="BAJA">Baja</option>
           </select>
         </div>
 
@@ -85,10 +106,24 @@ export default function TaskDetail() {
             value={form.status}
             onChange={handleChange}
           >
-            <option>Pendiente</option>
-            <option>En Progreso</option>
-            <option>Completada</option>
+            <option value="PENDIENTE">Pendiente</option>
+            <option value="EN PROGRESO">En Progreso</option>
+            <option value="COMPLETADA">Completada</option>
           </select>
+        </div>
+
+        {/* NUEVO CAMPO: Fecha de vencimiento */}
+        <div className="mb-3">
+          <label className="form-label">Fecha de Vencimiento</label>
+          <input
+            type="date"
+            className="form-control"
+            name="fechaVencimiento"
+            value={form.fechaVencimiento}
+            onChange={handleChange}
+            disabled={isDisabled} // solo si ya existe en DB
+            min={minDate} // no permitir hoy ni fechas pasadas
+          />
         </div>
 
         <div className="d-flex justify-content-between">

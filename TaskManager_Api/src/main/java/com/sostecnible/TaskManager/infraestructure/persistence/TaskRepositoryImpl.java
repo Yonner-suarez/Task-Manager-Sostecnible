@@ -1,8 +1,10 @@
-package com.sostecnible.taskmanager.infrastructure.persistence;
+package com.sostecnible.TaskManager.infraestructure.persistence;
 
-import com.sostecnible.taskmanager.domain.model.Task;
-import com.sostecnible.taskmanager.domain.repository.TaskRepository;
 import org.springframework.stereotype.Repository;
+
+import com.sostecnible.TaskManager.domain.model.Task;
+import com.sostecnible.TaskManager.domain.repository.TaskRepository;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -25,17 +27,21 @@ public class TaskRepositoryImpl implements TaskRepository {
                 TaskEntity.Priority.valueOf(task.getPriority().name()),
                 task.getCreatedAt(),
                 task.getDueDate(),
-                task.isCompleted()
+                task.getStatus(),
+                task.getIsActive(),
+                task.getFechaVencimiento()
         );
         TaskEntity saved = jpaRepository.save(entity);
         return new Task(
                 saved.getIdTask(),
                 saved.getTitle(),
                 saved.getDescription(),
-                com.sostecnible.taskmanager.domain.model.Task.Priority.valueOf(saved.getPriority().name()),
+                com.sostecnible.TaskManager.domain.model.Task.Priority.valueOf(saved.getPriority().name()),
                 saved.getCreatedAt(),
                 saved.getDueDate(),
-                saved.isCompleted()
+                saved.getStatus(),
+                saved.getIsActive(),
+                saved.getFechaVencimiento()
         );
     }
 
@@ -46,10 +52,12 @@ public class TaskRepositoryImpl implements TaskRepository {
                         e.getIdTask(),
                         e.getTitle(),
                         e.getDescription(),
-                        com.sostecnible.taskmanager.domain.model.Task.Priority.valueOf(e.getPriority().name()),
+                        com.sostecnible.TaskManager.domain.model.Task.Priority.valueOf(e.getPriority().name()),
                         e.getCreatedAt(),
                         e.getDueDate(),
-                        e.isCompleted()
+                        e.getStatus(),
+                        e.getIsActive(),
+                        e.getFechaVencimiento()
                 ));
     }
 
@@ -60,10 +68,12 @@ public class TaskRepositoryImpl implements TaskRepository {
                         e.getIdTask(),
                         e.getTitle(),
                         e.getDescription(),
-                        com.sostecnible.taskmanager.domain.model.Task.Priority.valueOf(e.getPriority().name()),
+                        com.sostecnible.TaskManager.domain.model.Task.Priority.valueOf(e.getPriority().name()),
                         e.getCreatedAt(),
                         e.getDueDate(),
-                        e.isCompleted()
+                        e.getStatus(),
+                        e.getIsActive(),
+                        e.getFechaVencimiento()
                 ))
                 .collect(Collectors.toList());
     }

@@ -1,15 +1,15 @@
-package com.sostecnible.taskmanager.application.usecase;
+package com.sostecnible.TaskManager.aplication.usecase;
 
-import com.sostecnible.taskmanager.domain.model.Task;
-import com.sostecnible.taskmanager.domain.repository.TaskRepository;
+import com.sostecnible.TaskManager.domain.model.Task;
+import com.sostecnible.TaskManager.infraestructure.persistence.TaskRepositoryImpl;
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
 public class UpdateTaskUseCase {
-    private final TaskRepository repository;
+    private final TaskRepositoryImpl repository;
 
-    public UpdateTaskUseCase(TaskRepository repository) {
+    public UpdateTaskUseCase(TaskRepositoryImpl repository) {
         this.repository = repository;
     }
 

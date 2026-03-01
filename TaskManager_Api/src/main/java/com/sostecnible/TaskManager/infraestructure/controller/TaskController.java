@@ -1,13 +1,19 @@
-package com.sostecnible.taskmanager.infrastructure.controller;
+package com.sostecnible.TaskManager.infraestructure.controller;
 
-import com.sostecnible.taskmanager.application.usecase.*;
-import com.sostecnible.taskmanager.domain.model.Task;
 import org.springframework.web.bind.annotation.*;
+
+import com.sostecnible.TaskManager.aplication.usecase.CreateTaskUseCase;
+import com.sostecnible.TaskManager.aplication.usecase.DeleteTaskUseCase;
+import com.sostecnible.TaskManager.aplication.usecase.GetTasksUseCase;
+import com.sostecnible.TaskManager.aplication.usecase.UpdateTaskUseCase;
+import com.sostecnible.TaskManager.domain.model.Task;
+
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/tasks")
+@CrossOrigin(origins = "http://localhost:5173") 
 public class TaskController {
 
     private final CreateTaskUseCase createTask;
@@ -25,18 +31,22 @@ public class TaskController {
 
     @PostMapping
     public Task create(@RequestBody Task task) {
-        return createTask.execute(task);
+      return createTask.execute(task);
     }
-
-    @GetMapping
-    public List<Task> getAll() {
-        return getTasks.getAll();
-    }
-
+    
     @GetMapping("/{id}")
     public Optional<Task> getById(@PathVariable Long id) {
-        return getTasks.getById(id);
+      return getTasks.getById(id);
     }
+    
+    @GetMapping
+      public List<Task> getAll(
+              @RequestParam(required = false) String priority,
+              @RequestParam(required = false) String status,
+              @RequestParam(required = false) String search
+      ) {
+        return getTasks.getByFilter(priority, status, search);
+      }
 
     @PutMapping("/{id}")
     public Optional<Task> update(@PathVariable Long id, @RequestBody Task task) {

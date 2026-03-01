@@ -1,7 +1,8 @@
-package com.sostecnible.taskmanager.application.usecase;
+package com.sostecnible.TaskManager.aplication.usecase;
 
-import com.sostecnible.taskmanager.domain.repository.TaskRepository;
 import org.springframework.stereotype.Service;
+
+import com.sostecnible.TaskManager.domain.repository.TaskRepository;
 
 @Service
 public class DeleteTaskUseCase {
@@ -12,6 +13,9 @@ public class DeleteTaskUseCase {
     }
 
     public void execute(Long id) {
-        repository.delete(id);
+        repository.findById(id).ifPresent(task -> {
+            task.setIsActive(0);  
+            repository.save(task);
+        });
     }
 }

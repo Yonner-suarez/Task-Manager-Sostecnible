@@ -1,4 +1,4 @@
-package com.sostecnible.taskmanager.infrastructure.persistence;
+package com.sostecnible.TaskManager.infraestructure.persistence;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,24 +6,50 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
+@Entity
+@Table(name = "tbl_task")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "tbl_task")
 public class TaskEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTask;
-    private String title;
-    private String description;
-    @Enumerated(EnumType.STRING)
-    private Priority priority;
-    private LocalDate createdAt;
-    private LocalDate dueDate;
-    private boolean completed;
 
-    public enum Priority {
-        ALTA, MEDIA, BAJA
+    @Column(nullable = false)
+    private String title;
+
+    @Column(nullable = false, length = 500)
+    private String description;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Priority priority;
+
+    @Column(nullable = false)
+    private LocalDate createdAt;
+
+    private LocalDate dueDate;
+
+    @Column(nullable = false)
+    private String status;
+
+    @Column(nullable = false) 
+    private Integer isActive; // 1 = activo, 0 = borrado lógico
+
+    @Column(nullable = false)
+    private LocalDate fechaVencimiento;
+
+
+    @PrePersist
+protected void onCreate() {
+    if (createdAt == null) {
+        createdAt = LocalDate.now();  // Se asigna fecha actual antes de insertar
     }
+    if (isActive == null) {
+        isActive = 1; // Por si acaso
+    }
+}
+
+    public enum Priority { ALTA, MEDIA, BAJA }
 }

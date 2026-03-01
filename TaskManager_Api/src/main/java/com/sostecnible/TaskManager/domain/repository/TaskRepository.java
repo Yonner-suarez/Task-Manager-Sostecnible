@@ -1,8 +1,9 @@
-package com.sostecnible.taskmanager.domain.repository;
+package com.sostecnible.TaskManager.domain.repository;
 
-import com.sostecnible.taskmanager.domain.model.Task;
 import java.util.List;
 import java.util.Optional;
+
+import com.sostecnible.TaskManager.domain.model.Task;
 
 public interface TaskRepository {
     Task save(Task task);

@@ -1,8 +1,9 @@
-package com.sostecnible.taskmanager.application.usecase;
+package com.sostecnible.TaskManager.aplication.usecase;
 
-import com.sostecnible.taskmanager.domain.model.Task;
-import com.sostecnible.taskmanager.domain.repository.TaskRepository;
 import org.springframework.stereotype.Service;
+
+import com.sostecnible.TaskManager.domain.model.Task;
+import com.sostecnible.TaskManager.domain.repository.TaskRepository;
 
 @Service
 public class CreateTaskUseCase {

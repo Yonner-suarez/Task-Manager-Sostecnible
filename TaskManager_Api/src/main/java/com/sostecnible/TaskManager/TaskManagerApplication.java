@@ -1,4 +1,4 @@
-package com.sostecnible.taskmanager;
+package com.sostecnible.TaskManager;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
