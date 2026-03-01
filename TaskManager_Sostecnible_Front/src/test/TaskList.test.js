@@ -57,14 +57,14 @@ test("renderiza lista de tareas", () => {
 
   const tasksMock = [
     {
-      id: 1,
+      idTask: 1,
       title: "Tarea 1",
       description: "Descripción 1",
       priority: "Alta",
       status: "Pendiente",
     },
     {
-      id: 2,
+      idTask: 2,
       title: "Tarea 2",
       description: "",
       priority: "Media",

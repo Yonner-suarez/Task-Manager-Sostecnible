@@ -94,10 +94,17 @@ class TaskRepositoryImplUnitTest {
 
     @Test
     void testDelete() {
+        // 1. Configurar el mock para que diga que la tarea SÍ existe
+        when(jpaRepository.existsById(1L)).thenReturn(true);
+        
+        // 2. Configurar el comportamiento del delete
         doNothing().when(jpaRepository).deleteById(1L);
 
+        // 3. Ejecutar
         repository.delete(1L);
 
+        // 4. Verificar que se llamaron a ambos métodos
+        verify(jpaRepository, times(1)).existsById(1L);
         verify(jpaRepository, times(1)).deleteById(1L);
     }
 }
