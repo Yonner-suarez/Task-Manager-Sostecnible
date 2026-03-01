@@ -1,10 +1,12 @@
-package com.sostecnible.TaskManager.infraestructure.persistence;
+package com.sostecnible.TaskManager.infraestructure.persistence.Task;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
+
+import com.sostecnible.TaskManager.infraestructure.persistence.User.UserEntity;
 
 @Entity
 @Table(name = "tbl_task")
@@ -38,16 +40,19 @@ public class TaskEntity {
     @Column(nullable = false)
     private LocalDate fechaVencimiento;
 
+    @ManyToOne(fetch = FetchType.LAZY) 
+    @JoinColumn(name = "user_id", nullable = false) 
+    private UserEntity user;
 
     @PrePersist
-protected void onCreate() {
+    protected void onCreate() {
     if (createdAt == null) {
         createdAt = LocalDate.now();  // Se asigna fecha actual antes de insertar
     }
     if (isActive == null) {
         isActive = 1; // cuando se cree activar por defecto
     }
-}
+  }
 
     public enum Priority { ALTA, MEDIA, BAJA }
 }

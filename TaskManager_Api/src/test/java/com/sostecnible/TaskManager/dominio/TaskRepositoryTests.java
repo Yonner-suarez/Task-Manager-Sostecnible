@@ -1,7 +1,8 @@
 package com.sostecnible.TaskManager.dominio;
 
 import com.sostecnible.TaskManager.domain.model.Task;
-import com.sostecnible.TaskManager.infraestructure.persistence.TaskRepositoryImpl;
+import com.sostecnible.TaskManager.infraestructure.persistence.Task.TaskRepositoryImpl;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

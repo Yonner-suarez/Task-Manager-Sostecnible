@@ -3,7 +3,7 @@ package com.sostecnible.TaskManager.aplication;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-import com.sostecnible.TaskManager.aplication.usecase.CreateTaskUseCase;
+import com.sostecnible.TaskManager.aplication.usecase.UseCaseTask.CreateTaskUseCase;
 import com.sostecnible.TaskManager.domain.model.Task;
 import com.sostecnible.TaskManager.domain.repository.TaskRepository;
 import org.junit.jupiter.api.BeforeEach;

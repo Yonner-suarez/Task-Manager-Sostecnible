@@ -2,7 +2,7 @@ package com.sostecnible.TaskManager.aplication;
 
 import static org.mockito.Mockito.*;
 
-import com.sostecnible.TaskManager.aplication.usecase.DeleteTaskUseCase;
+import com.sostecnible.TaskManager.aplication.usecase.UseCaseTask.DeleteTaskUseCase;
 import com.sostecnible.TaskManager.domain.model.Task;
 import com.sostecnible.TaskManager.domain.repository.TaskRepository;
 import org.junit.jupiter.api.BeforeEach;

@@ -23,6 +23,7 @@ public class Task {
     private String status;
     private Integer isActive; // 1 = activo, 0 = borrado lógico
     private LocalDate fechaVencimiento;
+    private Long userId;
 
     public enum Priority {
         ALTA, MEDIA, BAJA

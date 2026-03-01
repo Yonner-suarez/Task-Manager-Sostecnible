@@ -1,6 +1,6 @@
 package com.sostecnible.TaskManager.aplication;
 
-import com.sostecnible.TaskManager.aplication.usecase.GetTasksUseCase;
+import com.sostecnible.TaskManager.aplication.usecase.UseCaseTask.GetTasksUseCase;
 import com.sostecnible.TaskManager.domain.model.Task;
 import com.sostecnible.TaskManager.domain.model.Task.Priority;
 import com.sostecnible.TaskManager.domain.repository.TaskRepository;

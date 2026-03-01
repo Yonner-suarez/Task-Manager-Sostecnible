@@ -1,4 +1,4 @@
-package com.sostecnible.TaskManager.infraestructure.persistence;
+package com.sostecnible.TaskManager.infraestructure.persistence.Task;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

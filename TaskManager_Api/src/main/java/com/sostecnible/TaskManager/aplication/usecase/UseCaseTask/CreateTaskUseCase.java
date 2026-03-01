@@ -1,4 +1,4 @@
-package com.sostecnible.TaskManager.aplication.usecase;
+package com.sostecnible.TaskManager.aplication.usecase.UseCaseTask;
 
 import org.springframework.stereotype.Service;
 

@@ -1,10 +1,10 @@
 package com.sostecnible.TaskManager.infraestructure.ControllersTest;
 
 import com.sostecnible.TaskManager.domain.model.Task;
-import com.sostecnible.TaskManager.aplication.usecase.CreateTaskUseCase;
-import com.sostecnible.TaskManager.aplication.usecase.DeleteTaskUseCase;
-import com.sostecnible.TaskManager.aplication.usecase.GetTasksUseCase;
-import com.sostecnible.TaskManager.aplication.usecase.UpdateTaskUseCase;
+import com.sostecnible.TaskManager.aplication.usecase.UseCaseTask.CreateTaskUseCase;
+import com.sostecnible.TaskManager.aplication.usecase.UseCaseTask.DeleteTaskUseCase;
+import com.sostecnible.TaskManager.aplication.usecase.UseCaseTask.GetTasksUseCase;
+import com.sostecnible.TaskManager.aplication.usecase.UseCaseTask.UpdateTaskUseCase;
 import com.sostecnible.TaskManager.infraestructure.controller.TaskController;
 
 import tools.jackson.databind.ObjectMapper;

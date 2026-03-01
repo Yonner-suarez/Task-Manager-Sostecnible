@@ -1,7 +1,8 @@
-package com.sostecnible.TaskManager.aplication.usecase;
+package com.sostecnible.TaskManager.aplication.usecase.UseCaseTask;
 
 import com.sostecnible.TaskManager.domain.model.Task;
-import com.sostecnible.TaskManager.infraestructure.persistence.TaskRepositoryImpl;
+import com.sostecnible.TaskManager.infraestructure.persistence.Task.TaskRepositoryImpl;
+
 import org.springframework.stereotype.Service;
 import java.util.Optional;
 

@@ -1,6 +1,10 @@
 package com.sostecnible.TaskManager.infraestructure.persistence;
 
 import com.sostecnible.TaskManager.domain.model.Task;
+import com.sostecnible.TaskManager.infraestructure.persistence.Task.JpaTaskRepository;
+import com.sostecnible.TaskManager.infraestructure.persistence.Task.TaskEntity;
+import com.sostecnible.TaskManager.infraestructure.persistence.Task.TaskRepositoryImpl;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.Arrays;
