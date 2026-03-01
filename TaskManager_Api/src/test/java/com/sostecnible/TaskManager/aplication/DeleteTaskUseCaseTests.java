@@ -52,6 +52,6 @@ class DeleteTaskUseCaseTest {
         deleteTaskUseCase.execute(2L);
 
         // Assert
-        verify(repository, never()).save(any()); // nunca se llama save
+        verify(repository, never()).save(any());
     }
 }

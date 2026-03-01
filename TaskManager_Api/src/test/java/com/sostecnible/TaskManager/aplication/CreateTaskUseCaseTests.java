@@ -37,18 +37,14 @@ class CreateTaskUseCaseTest {
         savedTask.setTitle(task.getTitle());
         savedTask.setDescription(task.getDescription());
 
-        // Mockear comportamiento del repositorio
         when(repository.save(task)).thenReturn(savedTask);
 
-        // Act: ejecutar el caso de uso
         Task result = createTaskUseCase.execute(task);
 
-        // Assert: verificar resultados
         assertEquals(savedTask.getIdTask(), result.getIdTask());
         assertEquals(savedTask.getTitle(), result.getTitle());
         assertEquals(savedTask.getDescription(), result.getDescription());
 
-        // Verificar que repository.save fue llamado exactamente una vez
         verify(repository, times(1)).save(task);
     }
 }

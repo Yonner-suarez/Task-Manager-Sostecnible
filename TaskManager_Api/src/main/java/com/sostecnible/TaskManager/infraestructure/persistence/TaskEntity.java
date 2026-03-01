@@ -45,7 +45,7 @@ protected void onCreate() {
         createdAt = LocalDate.now();  // Se asigna fecha actual antes de insertar
     }
     if (isActive == null) {
-        isActive = 1; // Por si acaso
+        isActive = 1; // cuando se cree activar por defecto
     }
 }
 

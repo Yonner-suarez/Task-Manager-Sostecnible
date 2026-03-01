@@ -15,7 +15,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/tasks")
-@CrossOrigin(origins = "http://localhost:5173") 
 public class TaskController {
 
     private final CreateTaskUseCase createTask;

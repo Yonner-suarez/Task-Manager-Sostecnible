@@ -34,13 +34,10 @@ class TaskRepositoryTests {
         task.setStatus("PENDIENTE");
         task.setIsActive(1);
         
-        // --- FIX: Campos obligatorios que faltaban ---
-        // Según tu log, la columna 'fecha_vencimiento' no permite nulos
         task.setFechaVencimiento(LocalDate.now().plusDays(7));
-        // 'created_at' también suele ser obligatorio
+        
         task.setCreatedAt(LocalDate.now());
-        // Si 'due_date' es distinto a fechaVencimiento, asígnalo también:
-        // task.setDueDate(LocalDate.now().plusDays(7));
+        
     }
 
     @Test

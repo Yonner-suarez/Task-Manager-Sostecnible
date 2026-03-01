@@ -112,22 +112,18 @@ void testGetByFilter_sortByCreatedAt_soonestAndLatest() {
     task2.setIsActive(1);
     task3.setIsActive(1);
 
-    // Usa LocalDate (no LocalDateTime)
     task1.setCreatedAt(java.time.LocalDate.of(2026, 2, 25));
     task2.setCreatedAt(java.time.LocalDate.of(2026, 2, 26));
     task3.setCreatedAt(java.time.LocalDate.of(2026, 2, 27));
 
-    // Mockear el repositorio
     when(repository.findAll()).thenReturn(Arrays.asList(task1, task2, task3));
 
-    // Orden por "soonest" (más reciente primero)
     List<Task> resultRecent = getTasksUseCase.getByFilter(null, null, null, "soonest");
     assertEquals(3, resultRecent.size());
     assertEquals(task3.getIdTask(), resultRecent.get(0).getIdTask());
     assertEquals(task2.getIdTask(), resultRecent.get(1).getIdTask());
     assertEquals(task1.getIdTask(), resultRecent.get(2).getIdTask());
 
-    // Orden por "latest" (más antiguo primero)
     List<Task> resultOldest = getTasksUseCase.getByFilter(null, null, null, "latest");
     assertEquals(3, resultOldest.size());
     assertEquals(task1.getIdTask(), resultOldest.get(0).getIdTask());

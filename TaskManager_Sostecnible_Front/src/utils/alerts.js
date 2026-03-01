@@ -51,7 +51,6 @@ export const handleBackendError = (error) => {
   const details = errorData?.data;
 
   let detailText = "";
-  // Si hay errores de validación (el mapa de campos)
   if (details && typeof details === "object") {
     detailText = Object.values(details).join("\n");
   }

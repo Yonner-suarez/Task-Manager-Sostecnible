@@ -20,13 +20,13 @@ public class GlobalExceptionHandler {
         ErrorResponse error = new ErrorResponse(
             HttpStatus.BAD_REQUEST.value(),
             ex.getMessage(),
-            null, // No hay errores de campo aquí
+            null, 
             System.currentTimeMillis()
         );
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
-    // 2. MANEJAR ERRORES DE VALIDACIÓN (Aquí está el cambio clave)
+    // 2. manejo de errores validacion
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ErrorResponse> handleValidationExceptions(MethodArgumentNotValidException ex) {
         Map<String, String> errors = new HashMap<>();
@@ -35,11 +35,10 @@ public class GlobalExceptionHandler {
             errors.put(error.getField(), error.getDefaultMessage())
         );
         
-        // Creamos la respuesta con el formato unificado
         ErrorResponse errorResponse = new ErrorResponse(
             HttpStatus.BAD_REQUEST.value(),
             "Error de validación en los campos",
-            errors, // <--- Aquí va el mapa con "title": "no puede estar vacío", etc.
+            errors,
             System.currentTimeMillis()
         );
         

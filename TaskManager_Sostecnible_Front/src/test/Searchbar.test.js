@@ -20,5 +20,4 @@ test("renderiza input y boton de búsqueda", () => {
   expect(button).toBeInTheDocument();
 
   fireEvent.change(input, { target: { value: "Tarea 1" } });
-  // Aquí normalmente verificarías que setSearchQuery fue llamado
 });

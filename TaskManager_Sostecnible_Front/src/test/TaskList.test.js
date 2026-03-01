@@ -2,15 +2,13 @@ jest.mock("../api/taskApi", () => require("./taskApi.mock"));
 
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import TaskList from "../pages/TaskList"; // ahora sí usará el mock
+import TaskList from "../pages/TaskList";
 import { useTaskStore } from "../store/store";
 import { useQuery } from "@tanstack/react-query";
 
-// Mock del store y react-query
 jest.mock("../store/store");
 jest.mock("@tanstack/react-query");
 
-// --- TESTS ---
 test("muestra mensaje de cargando", () => {
   useTaskStore.mockReturnValue({
     filterPriority: "",
