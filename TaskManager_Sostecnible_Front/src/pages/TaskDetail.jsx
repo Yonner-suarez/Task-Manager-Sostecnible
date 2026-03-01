@@ -2,15 +2,29 @@ import React, { useState, useEffect } from "react";
 import { useTaskStore } from "../store/store";
 import { createOrUpdateTask } from "../api/taskApi";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 export default function TaskDetail() {
   const { selectedTask, setSelectedTask } = useTaskStore();
+  const queryClient = useQueryClient();
   const [form, setForm] = useState({
     title: "",
     description: "",
     priority: "MEDIA",
     status: "PENDIENTE",
-    fechaVencimiento: "", // nueva propiedad
+    fechaVencimiento: "",
+  });
+
+  const mutation = useMutation({
+    mutationFn: createOrUpdateTask,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["tasks"] });
+
+      setSelectedTask(null);
+    },
+    onError: (error) => {
+      alert("Hubo un error al guardar la tarea");
+    },
   });
 
   useEffect(() => {
@@ -34,6 +48,7 @@ export default function TaskDetail() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     await createOrUpdateTask(form);
+    mutation.mutate(form);
     setSelectedTask(null);
   };
 
@@ -48,7 +63,7 @@ export default function TaskDetail() {
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(today.getDate() + 1);
-  const minDate = tomorrow.toISOString().split("T")[0]; // formato yyyy-mm-dd
+  const minDate = tomorrow.toISOString().split("T")[0];
 
   // Solo deshabilitar si la fecha ya viene de la DB
   const isDisabled = selectedTask?.fechaVencimiento ? true : false;
@@ -56,7 +71,7 @@ export default function TaskDetail() {
   return (
     <div className="card shadow-sm border-0 rounded-3 p-3">
       <h5 className="card-title mb-3">
-        {form.id ? "Editar Tarea" : "Nueva Tarea"}
+        {form.idTask ? "Editar Tarea" : "Nueva Tarea"}
       </h5>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
@@ -112,7 +127,6 @@ export default function TaskDetail() {
           </select>
         </div>
 
-        {/* NUEVO CAMPO: Fecha de vencimiento */}
         <div className="mb-3">
           <label className="form-label">Fecha de Vencimiento</label>
           <input
@@ -121,8 +135,8 @@ export default function TaskDetail() {
             name="fechaVencimiento"
             value={form.fechaVencimiento}
             onChange={handleChange}
-            disabled={isDisabled} // solo si ya existe en DB
-            min={minDate} // no permitir hoy ni fechas pasadas
+            disabled={isDisabled}
+            min={minDate}
           />
         </div>
 

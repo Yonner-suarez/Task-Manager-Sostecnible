@@ -3,6 +3,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchTasks, deleteTask } from "../api/taskApi";
 import { useTaskStore } from "../store/store";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { getPriorityBadge, getStatusBadge } from "../utils/stylesPriority";
 
 export default function TaskList() {
   const { filterPriority, filterStatus, searchQuery, setSelectedTask, sortBy } =
@@ -26,7 +27,7 @@ export default function TaskList() {
   const handleDelete = async (taskId) => {
     if (window.confirm("¿Estás seguro de eliminar esta tarea?")) {
       await deleteTask(taskId);
-      queryClient.invalidateQueries(["tasks"]); // refresca la lista
+      queryClient.invalidateQueries(["tasks"]);
     }
   };
 
@@ -75,7 +76,7 @@ export default function TaskList() {
                   <button
                     className="btn btn-sm btn-danger"
                     onClick={(e) => {
-                      e.stopPropagation(); // evita que se seleccione la tarea
+                      e.stopPropagation();
                       handleDelete(task.idTask);
                     }}
                   >
@@ -89,32 +90,4 @@ export default function TaskList() {
       </div>
     </div>
   );
-}
-
-// Colores de prioridad
-function getPriorityBadge(priority) {
-  switch (priority.toUpperCase()) {
-    case "ALTA":
-      return "bg-danger";
-    case "MEDIA":
-      return "bg-warning text-dark";
-    case "BAJA":
-      return "bg-success";
-    default:
-      return "bg-secondary";
-  }
-}
-
-// Colores de estado
-function getStatusBadge(status) {
-  switch (status.toUpperCase()) {
-    case "PENDIENTE":
-      return "bg-primary";
-    case "EN PROGRESO":
-      return "bg-info text-dark";
-    case "COMPLETADA":
-      return "bg-success";
-    default:
-      return "bg-secondary";
-  }
 }

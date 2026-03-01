@@ -17,7 +17,6 @@ public class Task {
     private String description;
     private Priority priority;
     private LocalDate createdAt;
-    private LocalDate dueDate;
     private String status;
     private Integer isActive; // 1 = activo, 0 = borrado lógico
     private LocalDate fechaVencimiento;

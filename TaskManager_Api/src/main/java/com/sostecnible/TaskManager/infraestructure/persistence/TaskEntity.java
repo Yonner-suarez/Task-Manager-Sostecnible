@@ -29,8 +29,6 @@ public class TaskEntity {
     @Column(nullable = false)
     private LocalDate createdAt;
 
-    private LocalDate dueDate;
-
     @Column(nullable = false)
     private String status;
 
