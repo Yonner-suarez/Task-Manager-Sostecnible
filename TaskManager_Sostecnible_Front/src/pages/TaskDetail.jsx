@@ -47,7 +47,6 @@ export default function TaskDetail() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await createOrUpdateTask(form);
     mutation.mutate(form);
     setSelectedTask(null);
   };
