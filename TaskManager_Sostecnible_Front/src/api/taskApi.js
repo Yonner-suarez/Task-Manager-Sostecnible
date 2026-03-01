@@ -1,4 +1,5 @@
 import axios from "axios";
+import { handleBackendError, showToast } from "../utils/alerts";
 
 const API_URL = import.meta.env.VITE_URL_API;
 
@@ -16,19 +17,31 @@ export const fetchTaskById = async (id) => {
 };
 
 export const createOrUpdateTask = async (task) => {
-  if (task.idTask) {
-    const response = await axios.put(`${API_URL}/${task.idTask}`, task);
+  try {
+    let response;
+    if (task.idTask) {
+      response = await axios.put(`${API_URL}/${task.idTask}`, task);
+      showToast("Tarea actualizada correctamente", "success");
+    } else {
+      response = await axios.post(API_URL, task);
+      showToast("Tarea creada con éxito", "success");
+    }
     return response.data;
-  } else {
-    const response = await axios.post(API_URL, task);
-    return response.data;
+  } catch (error) {
+    handleBackendError(error);
+    throw error;
   }
 };
 
 export const deleteTask = async (taskId) => {
-  if (taskId) {
-    const response = await axios.delete(`${API_URL}/${taskId}`);
-    return response.data;
+  try {
+    if (taskId) {
+      const response = await axios.delete(`${API_URL}/${taskId}`);
+      showToast("Tarea eliminada", "info");
+      return response.data;
+    }
+  } catch (error) {
+    handleBackendError(error);
+    throw error;
   }
-  return null;
 };

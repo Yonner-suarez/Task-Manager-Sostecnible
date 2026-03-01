@@ -8,6 +8,8 @@ import com.sostecnible.TaskManager.aplication.usecase.GetTasksUseCase;
 import com.sostecnible.TaskManager.aplication.usecase.UpdateTaskUseCase;
 import com.sostecnible.TaskManager.domain.model.Task;
 
+import jakarta.validation.Valid;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -30,7 +32,7 @@ public class TaskController {
     }
 
     @PostMapping
-    public Task create(@RequestBody Task task) {
+    public Task create(@Valid @RequestBody Task task) {
       return createTask.execute(task);
     }
     
@@ -50,7 +52,7 @@ public class TaskController {
       }
 
     @PutMapping("/{id}")
-    public Optional<Task> update(@PathVariable Long id, @RequestBody Task task) {
+    public Optional<Task> update(@Valid @PathVariable Long id,@Valid @RequestBody Task task) {
         return updateTask.execute(id, task);
     }
 

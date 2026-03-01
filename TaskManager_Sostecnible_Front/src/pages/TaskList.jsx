@@ -3,6 +3,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { fetchTasks, deleteTask } from "../api/taskApi";
 import { useTaskStore } from "../store/store";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { showConfirm } from "../utils/alerts";
 import { getPriorityBadge, getStatusBadge } from "../utils/stylesPriority";
 
 export default function TaskList() {
@@ -25,7 +26,11 @@ export default function TaskList() {
   });
 
   const handleDelete = async (taskId) => {
-    if (window.confirm("¿Estás seguro de eliminar esta tarea?")) {
+    const confirmed = await showConfirm(
+      "¿Eliminar tarea?",
+      "¿Estás seguro de que deseas borrar esta tarea?"
+    );
+    if (confirmed) {
       await deleteTask(taskId);
       queryClient.invalidateQueries(["tasks"]);
     }

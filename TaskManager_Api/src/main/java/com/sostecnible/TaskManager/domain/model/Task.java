@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+
+import jakarta.validation.constraints.NotBlank;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,6 +16,7 @@ import java.time.LocalDate;
 public class Task {
     private Long idTask;
     private String title;
+    @NotBlank(message = "La descripción no puede estar vacía")
     private String description;
     private Priority priority;
     private LocalDate createdAt;
